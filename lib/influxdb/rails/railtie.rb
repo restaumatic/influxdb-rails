@@ -25,9 +25,6 @@ module InfluxDB
           include InfluxDB::Rails::Instrumentation
         end
 
-        require "influxdb/rails/middleware/hijack_render_exception"
-        ::ActionDispatch::DebugExceptions.prepend InfluxDB::Rails::Middleware::HijackRenderException
-
         cache = lambda do |_, _, _, _, payload|
           current = InfluxDB::Rails.current
           current.controller = payload[:controller]
